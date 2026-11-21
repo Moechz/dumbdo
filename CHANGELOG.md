@@ -2,10 +2,20 @@
 
 All notable user-visible changes to the DumbDo TOS application package.
 
+## 2026.11.14-6 — 2026-11-21
+
+### Changed
+- **Host port restored to 8163** (was briefly moved to 8182). Port collisions
+  between App Center applications are expected — the store carries thousands of
+  apps — and are resolved by the user choosing not to run colliding apps at the
+  same time. The package does not work around them.
+- Everything else from 2026.11.14-4/-5 is unchanged (multi-arch image, privacy
+  policy, licence correction, translated description, full source repository).
+
 ## 2026.11.14-5 — 2026-11-21
 
 ### Fixed
-- **Port conflict**: the host port moved from 8163 to 8182. Another published
+- **Port conflict**: the host port moved from 8163 to 8163. Another published
   app (`gogsdocker`) also claimed 8163, so installing both would have failed on
   the second one. No data-path or feature change.
 - Kept every remediation from 2026.11.14-4 (multi-arch image, privacy policy,
@@ -76,7 +86,7 @@ validating `2026.11.14-3`.
   repository without forking the upstream image. The finding remains tracked:
   it will be re-checked on the next upstream release, and the package will be
   rebuilt on the fixed image as soon as one exists. Mitigations available today:
-  keep the app on the LAN, do not expose port 8182, and set `DUMBDO_PIN`.
+  keep the app on the LAN, do not expose port 8163, and set `DUMBDO_PIN`.
 
 ### Changed
 - Version bumped from `2026.11.14-3` to `2026.11.14-4` (upstream base

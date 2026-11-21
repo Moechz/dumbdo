@@ -22,7 +22,7 @@
   "upstream_license": "GPL-3.0",
   "descript": "DumbDo is a minimal, self-hosted todo list: create several lists, add tasks, tick them off, reorder them by drag and drop, and clear the completed ones. It is a single-user app with no accounts, no cloud service and no telemetry; an optional PIN gate is enabled with the DUMBDO_PIN variable. This package runs the upstream image unmodified as a non-root container and stores the lists as a JSON file in the application data folder.",
   "release_note": "2026.11.14-4: remediation of the listing review (C10/C2/C3/C9/F2/T1) - complete source repository and README, privacy policy, licence notice with the upstream GPL-3.0 attribution, accurate descriptions and Chinese translations, and a start-up fix: the package now uses the official multi-arch upstream image pinned by commit tag (so the aarch64 build runs natively) and copies only its small code files instead of the 250 MB dependency tree. T1 is retained: upstream has no newer build; tracked in CHANGELOG.",
-  "important": "Open http://<NAS-IP>:8182. Todos are saved in /Volume1/DockerAppData/dumbdodocker/data/todos.json and survive restarts and updates; only the data folder is written. Set DUMBDO_PIN to require a PIN. Runs as uid 1000. Back up the data folder before uninstalling with data removal. Plain HTTP on the LAN; use a VPN or reverse proxy with TLS on untrusted networks. Privacy policy: see the Help link.",
+  "important": "Open http://<NAS-IP>:8163. Todos are saved in /Volume1/DockerAppData/dumbdodocker/data/todos.json and survive restarts and updates; only the data folder is written. Set DUMBDO_PIN to require a PIN. Runs as uid 1000. Back up the data folder before uninstalling with data removal. Plain HTTP on the LAN; use a VPN or reverse proxy with TLS on untrusted networks. Privacy policy: see the Help link.",
   "healthcheck": [
     "CMD-SHELL",
     "wget -q -O /dev/null http://127.0.0.1:3000/ || exit 1"
@@ -35,7 +35,7 @@
   "github_repo": "dumbdo",
   "upstream_version": "2026.11.14",
   "release_tag_prefix": "v",
-  "version": "2026.11.14-5",
+  "version": "2026.11.14-6",
   "help": "https://github.com/Moechz/dumbdo/blob/main/PRIVACY.md",
   "official": "https://github.com/DumbWareio/DumbDo",
   "license": "GPL-3.0",
@@ -49,13 +49,13 @@
     "zh-cn": {
       "descript": "DumbDo 是一个极简的自托管待办清单：可创建多个清单、添加任务、勾选完成、拖拽排序并清除已完成项。单用户使用，没有账户体系、不连接云端，也不上报遥测；设置 DUMBDO_PIN 后可启用可选的 PIN 访问保护。本应用以非 root 容器运行上游镜像（未修改），任务以 JSON 文件保存在应用数据目录中。",
       "release_note": "2026.11.14-4：整改上轮审核意见（C10/C2/C3/C9/F2/T1）——补全源码仓库与 README、隐私政策、含上游 GPL-3.0 归属的许可证声明，修正应用描述与简体/繁体中文文案；启动修复：改用按 commit 固定的官方多架构上游镜像（aarch64 可原生运行），并且只复制少量代码文件，不再在首次启动复制约 250 MB 依赖。T1 保留：上游暂无更新构建，已在 CHANGELOG 记录。",
-      "important": "打开 http://<NAS-IP>:8182。任务保存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重启和升级不会丢失；只写入数据目录。设置 DUMBDO_PIN 可要求输入 PIN。容器以 uid 1000 运行。卸载并删除数据前请备份。局域网内为 HTTP；在不可信网络中请使用 VPN 或带 TLS 的反向代理。隐私政策见帮助链接。"
+      "important": "打开 http://<NAS-IP>:8163。任务保存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重启和升级不会丢失；只写入数据目录。设置 DUMBDO_PIN 可要求输入 PIN。容器以 uid 1000 运行。卸载并删除数据前请备份。局域网内为 HTTP；在不可信网络中请使用 VPN 或带 TLS 的反向代理。隐私政策见帮助链接。"
     },
     "zh-hk": {
       "descript": "DumbDo 是一個極簡的自託管待辦清單：可建立多個清單、新增任務、勾選完成、拖曳排序並清除已完成項目。單一使用者，沒有帳戶體系、不連接雲端，也不上報遙測；設定 DUMBDO_PIN 後可啟用可選的 PIN 存取保護。本應用以非 root 容器執行上游映像（未修改），任務以 JSON 檔案儲存在應用資料目錄中。",
       "release_note": "2026.11.14-4：整改上輪審核意見（C10/C2/C3/C9/F2/T1）——補全原始碼儲存庫與 README、隱私政策、含上游 GPL-3.0 歸屬的授權聲明，修正應用描述與簡體/繁體中文文案；啟動修復：改用按 commit 固定的官方多架構上游映像（aarch64 可原生執行），並且只複製少量程式碼檔案，不再在首次啟動複製約 250 MB 相依套件。T1 保留：上游暫無更新建置，已在 CHANGELOG 記錄。",
-      "important": "開啟 http://<NAS-IP>:8182。任務儲存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重新啟動和升級不會遺失；只寫入資料目錄。設定 DUMBDO_PIN 可要求輸入 PIN。容器以 uid 1000 執行。解除安裝並刪除資料前請備份。區域網路內為 HTTP；在不可信網路中請使用 VPN 或帶 TLS 的反向代理。隱私政策見說明連結。"
+      "important": "開啟 http://<NAS-IP>:8163。任務儲存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重新啟動和升級不會遺失；只寫入資料目錄。設定 DUMBDO_PIN 可要求輸入 PIN。容器以 uid 1000 執行。解除安裝並刪除資料前請備份。區域網路內為 HTTP；在不可信網路中請使用 VPN 或帶 TLS 的反向代理。隱私政策見說明連結。"
     }
   },
-  "host_port": 8182
+  "host_port": 8163
 }
