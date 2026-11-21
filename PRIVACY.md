@@ -51,7 +51,7 @@ environment settings and are not personal data collected by the developer.
 | Destination | When | Data sent |
 |---|---|---|
 | `registry-1.docker.io` (Docker Hub) or your configured registry mirror | install and update only | anonymous image pull; no todo data |
-| Your browser ↔ NAS on port 8163 | whenever you use the app | the todo lists you create, over plain HTTP on the LAN |
+| Your browser ↔ NAS on port 8182 | whenever you use the app | the todo lists you create, over plain HTTP on the LAN |
 | The developer's servers | never | none |
 
 The application embeds **no** third-party analytics, fonts, CDNs, ads or
@@ -80,17 +80,17 @@ developer. If you believe the packaging itself mishandles data, contact
 
 - The container runs as **uid 1000**, never as root, with no `privileged` mode,
   no host network, no `cap_add` and no Docker socket.
-- Only one port (8163) is published; the application stores data in a single
+- Only one port (8182) is published; the application stores data in a single
   JSON file inside its own data folder.
 - The image tag is pinned to the official upstream commit
   (`dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a`), never
   `:latest`.
 - The optional PIN gate (`DUMBDO_PIN`, 4–10 characters) limits casual access.
-  It is **off by default**; when off, anyone who can reach port 8163 can read
+  It is **off by default**; when off, anyone who can reach port 8182 can read
   and change the lists. The PIN is transmitted in a cookie and is not a
   replacement for transport security.
 - The web UI is served over **plain HTTP**. On an untrusted network, put it
-  behind a VPN or a reverse proxy with TLS, and do not expose port 8163 to the
+  behind a VPN or a reverse proxy with TLS, and do not expose port 8182 to the
   internet.
 - Back up `/Volume1/DockerAppData/dumbdodocker/data/todos.json` before
   uninstalling with data removal.

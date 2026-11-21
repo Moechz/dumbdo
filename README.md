@@ -23,7 +23,7 @@ the isolated staging test.
 | | |
 |---|---|
 | Container image | `dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a` (Docker Hub, official multi-arch upstream image, used unmodified) |
-| Open | `http://<NAS-IP>:8163/` (container port 3000) |
+| Open | `http://<NAS-IP>:8182/` (container port 3000) |
 | Runs as | non-root, `user: "1000:1000"` |
 | Persistent data | `/data` → `/Volume1/DockerAppData/dumbdodocker/data` |
 | Data file | `/Volume1/DockerAppData/dumbdodocker/data/todos.json` |
@@ -72,7 +72,7 @@ not committed.
 ## Install, first start and upgrade
 
 1. Install “DumbDo” from App Center, or install the package manually and open
-   `http://<NAS-IP>:8163/`.
+   `http://<NAS-IP>:8182/`.
 2. The first start creates `/Volume1/DockerAppData/dumbdodocker/data/todos.json`
    with an empty list. Nothing is downloaded except the Docker image.
 3. Tasks are saved immediately through `POST /api/todos`. Restarting or
@@ -106,7 +106,7 @@ field and `config.ini` point to that URL.
 ## Security and known limitations
 
 - **LAN exposure:** the web UI is plain HTTP and has no accounts. Without
-  `DUMBDO_PIN`, anyone who can reach port 8163 can read and change the lists.
+  `DUMBDO_PIN`, anyone who can reach port 8182 can read and change the lists.
   Use a VPN or a TLS reverse proxy on untrusted networks; do not expose the
   port to the internet.
 - **PIN is not encryption:** the PIN gates the UI/API and is kept in an

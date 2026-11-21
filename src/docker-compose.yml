@@ -5,7 +5,7 @@
 #                  (Docker Hub, official multi-arch image, used unmodified)
 #                  -> https://github.com/DumbWareio/DumbDo
 #
-# Ports   : host 8163 -> container 3000. The host port is in the
+# Ports   : host 8182 -> container 3000. The host port is in the
 #           TOS-recommended 8000-19999 range and is not one of the reserved
 #           ports (22/80/443/445/3306/5050/5432/6379/8181/8443).
 # Volumes : all persistent data lives below
@@ -40,7 +40,7 @@ services:
       - |
         @@ENTRYPOINT_SH@@
     ports:
-      - "8163:3000"
+      - "8182:3000"
     environment:
       TZ: "Asia/Shanghai"
     volumes:
@@ -56,5 +56,5 @@ services:
 # web.port is the published host port above, protocol is http.
 x-app-meta:
   web:
-    port: 8163
+    port: 8182
     protocol: http

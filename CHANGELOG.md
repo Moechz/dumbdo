@@ -2,6 +2,15 @@
 
 All notable user-visible changes to the DumbDo TOS application package.
 
+## 2026.11.14-5 — 2026-11-21
+
+### Fixed
+- **Port conflict**: the host port moved from 8163 to 8182. Another published
+  app (`gogsdocker`) also claimed 8163, so installing both would have failed on
+  the second one. No data-path or feature change.
+- Kept every remediation from 2026.11.14-4 (multi-arch image, privacy policy,
+  licence correction, translated description, full source repository).
+
 ## 2026.11.14-4 — 2026-11-21
 
 Supersedes `2026.11.14-3` before the aarch64 review completed. Same review
@@ -67,7 +76,7 @@ validating `2026.11.14-3`.
   repository without forking the upstream image. The finding remains tracked:
   it will be re-checked on the next upstream release, and the package will be
   rebuilt on the fixed image as soon as one exists. Mitigations available today:
-  keep the app on the LAN, do not expose port 8163, and set `DUMBDO_PIN`.
+  keep the app on the LAN, do not expose port 8182, and set `DUMBDO_PIN`.
 
 ### Changed
 - Version bumped from `2026.11.14-3` to `2026.11.14-4` (upstream base
