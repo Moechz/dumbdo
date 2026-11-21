@@ -1,0 +1,61 @@
+{
+  "app_id": "dumbdodocker",
+  "title": "DumbDo",
+  "image": "moechz/dumbdo:2026.11.14",
+  "repo_name": "dumbdo",
+  "mode": "wrapper",
+  "container_port": 3000,
+  "category": [
+    "Utilities"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/dumbdodocker/data",
+      "container": "/data"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "DumbWare",
+  "upstream_url": "https://github.com/DumbWareio/DumbDo",
+  "upstream_license": "GPL-3.0",
+  "descript": "DumbDo is a minimal, self-hosted todo list: create several lists, add tasks, tick them off, reorder them by drag and drop, and clear the completed ones. It is a single-user app with no accounts, no cloud service and no telemetry; an optional PIN gate is enabled with the DUMBDO_PIN variable. This package runs the upstream image unmodified as a non-root container and stores the lists as a JSON file in the application data folder.",
+  "release_note": "2026.11.14-3: remediation of the listing review (C10/C2/C3/C9/F2/T1) - complete source repository and README, privacy policy, licence notice with the upstream GPL-3.0 attribution, accurate descriptions and Chinese translations, and a start-up fix that runs the app in place and migrates existing todos instead of copying 250 MB on first start.",
+  "important": "Open http://<NAS-IP>:8163. Todos are saved in /Volume1/DockerAppData/dumbdodocker/data/todos.json and survive restarts and updates; the app now runs in place and writes only the data folder. Set DUMBDO_PIN to require a PIN. Runs as uid 1000. Back up the data folder before uninstalling with data removal. Plain HTTP on the LAN; use a VPN or reverse proxy with TLS on untrusted networks. Privacy policy: see the Help link.",
+  "healthcheck": [
+    "CMD-SHELL",
+    "wget -q -O /dev/null http://127.0.0.1:3000/ || exit 1"
+  ],
+  "entrypoint_file": "src/entrypoint.sh",
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "dumbdodocker",
+  "github_repo": "dumbdo",
+  "upstream_version": "2026.11.14",
+  "release_tag_prefix": "v",
+  "version": "2026.11.14-3",
+  "help": "https://github.com/Moechz/dumbdo/blob/main/PRIVACY.md",
+  "official": "https://github.com/DumbWareio/DumbDo",
+  "license": "GPL-3.0",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "DumbDo 是一个极简的自托管待办清单：可创建多个清单、添加任务、勾选完成、拖拽排序并清除已完成项。单用户使用，没有账户体系、不连接云端，也不上报遥测；设置 DUMBDO_PIN 后可启用可选的 PIN 访问保护。本应用以非 root 容器运行上游镜像（未修改），任务以 JSON 文件保存在应用数据目录中。",
+      "release_note": "2026.11.14-3：整改上轮审核意见（C10/C2/C3/C9/F2/T1）——补全源码仓库与 README、隐私政策、含上游 GPL-3.0 归属的许可证声明，修正应用描述与简体/繁体中文文案，并修复首次启动失败（改为原地运行并迁移旧数据，不再复制约 250 MB 应用）。",
+      "important": "打开 http://<NAS-IP>:8163。任务保存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重启和升级不会丢失；应用改为原地运行，只写入数据目录。设置 DUMBDO_PIN 可要求输入 PIN。容器以 uid 1000 运行。卸载并删除数据前请备份。局域网内为 HTTP；在不可信网络中请使用 VPN 或带 TLS 的反向代理。隐私政策见帮助链接。"
+    },
+    "zh-hk": {
+      "descript": "DumbDo 是一個極簡的自託管待辦清單：可建立多個清單、新增任務、勾選完成、拖曳排序並清除已完成項目。單一使用者，沒有帳戶體系、不連接雲端，也不上報遙測；設定 DUMBDO_PIN 後可啟用可選的 PIN 存取保護。本應用以非 root 容器執行上游映像（未修改），任務以 JSON 檔案儲存在應用資料目錄中。",
+      "release_note": "2026.11.14-3：整改上輪審核意見（C10/C2/C3/C9/F2/T1）——補全原始碼儲存庫與 README、隱私政策、含上游 GPL-3.0 歸屬的授權聲明，修正應用描述與簡體/繁體中文文案，並修復首次啟動失敗（改為原地執行並遷移舊資料，不再複製約 250 MB 應用）。",
+      "important": "開啟 http://<NAS-IP>:8163。任務儲存在 /Volume1/DockerAppData/dumbdodocker/data/todos.json，重新啟動和升級不會遺失；應用改為原地執行，只寫入資料目錄。設定 DUMBDO_PIN 可要求輸入 PIN。容器以 uid 1000 執行。解除安裝並刪除資料前請備份。區域網路內為 HTTP；在不可信網路中請使用 VPN 或帶 TLS 的反向代理。隱私政策見說明連結。"
+    }
+  },
+  "host_port": 8163
+}
