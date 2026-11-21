@@ -1,7 +1,8 @@
 # ===========================================================================
 # DumbDo for TerraMaster TOS 7 (Docker application)
 # ===========================================================================
-# Upstream image : moechz/dumbdo:2026.11.14 (Docker Hub, used unmodified)
+# Upstream image : dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a
+#                  (Docker Hub, official multi-arch image, used unmodified)
 #                  -> https://github.com/DumbWareio/DumbDo
 #
 # Ports   : host 8163 -> container 3000. The host port is in the
@@ -15,9 +16,10 @@
 #           non-root user, no privileged mode, no network_mode: host, no
 #           cap_add, explicit TZ, a healthcheck on the only service, and
 #           x-app-meta as the last block.
-# Wrapper : the upstream image runs as root; the entrypoint below starts the
-#           application in place as uid 1000. Only /data is written, and data
-#           created by the previous copy-based layout is migrated at start-up.
+# Wrapper : the upstream image runs as root and may own /app as root; the
+#           entrypoint below runs as uid 1000, copies only the small code
+#           files into /data/app, reuses node_modules by symlink and keeps
+#           the todo data on the volume.
 # Escaping: docker compose interpolates ${VAR}/$VAR in compose files, so any
 #           '$' meant for the shell is written '$$'.
 #
@@ -29,7 +31,7 @@
 
 services:
   dumbdodocker:
-    image: moechz/dumbdo:2026.11.14
+    image: dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a
     container_name: dumbdodocker
     restart: unless-stopped
     user: "1000:1000"

@@ -1,6 +1,6 @@
 # NOTICE — third-party components and attributions
 
-This package (`dumbdodocker`, TOS 7 Docker application, version `2026.11.14-3`)
+This package (`dumbdodocker`, TOS 7 Docker application, version `2026.11.14-4`)
 is an independent packaging by Moechz of the upstream **DumbDo** project.
 
 ## 1. Upstream application — DumbDo
@@ -16,17 +16,20 @@ is an independent packaging by Moechz of the upstream **DumbDo** project.
   container image. No upstream source code is redistributed by this package;
   the image is pulled from Docker Hub at install time.
 
-## 2. Container image — `moechz/dumbdo:2026.11.14`
+## 2. Container image — `dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a`
 
-- Registry: Docker Hub — `docker.io/moechz/dumbdo:2026.11.14`
-- Manifest digest (linux/amd64, as resolved on the build NAS):
-  `sha256:8620f50201af33a6a5f0d494dce970d15e6a7fce27f9152285010ec8f5ac4bb8`
-  The tag is multi-architecture; the aarch64 image resolves to a different
-  manifest digest of the same build.
-- Maintainer: Moechz — a republished copy of the upstream image, so that the
-  package can follow the TOS “Docker Hub only, fixed tag” rule.
+- Registry: Docker Hub — `docker.io/dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a`
+- Source: the **official upstream image** for the commit above; it is an OCI
+  image index with native `linux/amd64` and `linux/arm64` manifests:
+  - `linux/amd64`: `sha256:8620f50201af33a6a5f0d494dce970d15e6a7fce27f9152285010ec8f5ac4bb8`
+  - `linux/arm64`: `sha256:8b59120d75c46cdc398850063c1bb8ae6481836f2eec401de7306181b43491ba`
+- The tag is the upstream commit hash, not `:latest`, so the same immutable
+  image is used for both architectures and for every reinstall.
 - The image is pulled from Docker Hub at install time and is not redistributed
   in this repository or in the package archive.
+- The maintainer's earlier `moechz/dumbdo:2026.11.14` mirror was a single
+  `linux/amd64` manifest; it is **not** used by this version because the
+  aarch64 package could not start from an amd64-only image.
 
 ## 3. Components inside the image
 

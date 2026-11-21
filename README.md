@@ -12,7 +12,7 @@ DumbDo on TOS 7 through the App Center:
 - `config.ini` — TOS application metadata (`application_type: docker`, id `dumbdodocker`)
 - `dumbdodocker.lang` — 23-language superset (TOS requires 14)
 - `dumbdodocker.svg` — application icon (SVG, rounded tile, 73.4% glyph)
-- `docker-compose.yml` — one service, image `moechz/dumbdo:2026.11.14`
+- `docker-compose.yml` — one service, image `dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a`
 
 The repository also contains the complete source of the package: the `src/`
 templates, the deterministic build scripts, the review-standards self-check and
@@ -22,7 +22,7 @@ the isolated staging test.
 
 | | |
 |---|---|
-| Container image | `moechz/dumbdo:2026.11.14` (Docker Hub, upstream image used unmodified) |
+| Container image | `dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a` (Docker Hub, official multi-arch upstream image, used unmodified) |
 | Open | `http://<NAS-IP>:8163/` (container port 3000) |
 | Runs as | non-root, `user: "1000:1000"` |
 | Persistent data | `/data` → `/Volume1/DockerAppData/dumbdodocker/data` |
@@ -113,8 +113,8 @@ field and `config.ini` point to that URL.
   HttpOnly cookie; it does not encrypt `todos.json` on disk.
 - **T1 (upstream CVE):** the review flagged a high/critical vulnerability in the
   upstream image. Upstream has published no newer source commit, tag or image
-  after 2025-12-30 (`d4dff81e4e`), and the mirrored image `moechz/dumbdo:2026.11.14`
-  is that same build. There is therefore no newer upstream image to move to.
+  after 2025-12-30 (`d4dff81e4e`), and the official image
+  `dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a` is that same build. There is therefore no newer upstream image to move to.
   The item is tracked in [CHANGELOG.md](CHANGELOG.md) and will be re-checked on
   every upstream release; the packaging itself cannot patch the runtime
   dependencies without forking the image. Keep the app on the LAN and update as
@@ -126,8 +126,8 @@ field and `config.ini` point to that URL.
 
 ```bash
 scripts/build.sh                  # -> out/dumbdodocker.tar.gz + .sha256
-scripts/build.sh 2026.11.14-3 x86_64
-scripts/build-dual.sh 2026.11.14-3   # both architectures + official -c
+scripts/build.sh 2026.11.14-4 x86_64
+scripts/build-dual.sh 2026.11.14-4   # both architectures + official -c
 python3 ../../stage.py .              # isolated runtime check (from issue-watch)
 ```
 
@@ -146,7 +146,7 @@ limits and the 73.4% icon glyph. `scripts/build-dual.sh` then runs the official
 | Component | Licence | Notes |
 |---|---|---|
 | DumbDo (upstream) | **GPL-3.0** | <https://github.com/DumbWareio/DumbDo> — used unmodified inside the image |
-| `moechz/dumbdo` image | GPL-3.0 | Docker Hub mirror of the upstream build, pulled at install time |
+| `dumbwareio/dumbdo` image | GPL-3.0 | Official upstream multi-arch image, pinned by commit tag, pulled at install time |
 | This packaging (compose, metadata, translations, icon, scripts) | MIT | see `LICENSE` |
 
 “DumbDo”, “DumbWare”, “TerraMaster” and “TOS” are trademarks or registered

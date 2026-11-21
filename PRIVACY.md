@@ -2,7 +2,7 @@
 
 **Last updated:** 21 November 2026
 **Data controller / contact:** Moechz — moechz@163.com
-**Applies to:** version `2026.11.14-3` and later of the TOS application
+**Applies to:** version `2026.11.14-4` and later of the TOS application
 `dumbdodocker`, the container image it runs and this repository.
 
 ## 1. Summary
@@ -82,7 +82,9 @@ developer. If you believe the packaging itself mishandles data, contact
   no host network, no `cap_add` and no Docker socket.
 - Only one port (8163) is published; the application stores data in a single
   JSON file inside its own data folder.
-- The image tag is pinned (`moechz/dumbdo:2026.11.14`) and is not `:latest`.
+- The image tag is pinned to the official upstream commit
+  (`dumbwareio/dumbdo:d4dff81e4eab16de0974a94742e1cd3bc51a369a`), never
+  `:latest`.
 - The optional PIN gate (`DUMBDO_PIN`, 4–10 characters) limits casual access.
   It is **off by default**; when off, anyone who can reach port 8163 can read
   and change the lists. The PIN is transmitted in a cookie and is not a

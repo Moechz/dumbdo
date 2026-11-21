@@ -2,33 +2,37 @@
 # ===========================================================================
 # TOS wrapper for DumbDo.
 # ===========================================================================
-# The upstream image ships /app owned by uid 1000 and expects to write only
-# its own data/ directory and the generated PWA assets under public/assets.
-# TOS forbids a root container, so this wrapper starts the application in
-# place as uid 1000 and points data/ at the persistent volume instead of
-# copying the whole application tree (about 250 MB) on first start. The copy
-# made the aarch64 installation test time out before the service became
-# ready, which is the start-up failure reported in the review.
+# The upstream image may be built with /app owned by root, so a non-root
+# container cannot write into the image tree. DumbDo only writes its data/
+# directory and the generated PWA assets under public/assets, so copy the
+# small application code (server.js, package.json, scripts/, public/) into
+# /data/app and reuse the image's node_modules through a symlink. Copying the
+# full ~250 MB application tree on first start is what made the aarch64
+# installation test time out; that copy is gone.
 #
 # Data written by 2026.11.14-2 lived in /data/app/data/todos.json because that
 # version ran a full copy of the app from the volume. Migrate it once, then
-# remove the stale copy so it does not occupy the volume twice.
+# point the app's data directory at the volume root.
 # ===========================================================================
 set -u
 set -e
 
-mkdir -p /data
+mkdir -p /data/app
 
-if [ -d /data/app ]; then
-  if [ -f /data/app/data/todos.json ] && [ ! -f /data/todos.json ]; then
-    cp /data/app/data/todos.json /data/todos.json
-  fi
-  rm -rf /data/app
+if [ -f /data/app/data/todos.json ] && [ ! -f /data/todos.json ]; then
+  cp /data/app/data/todos.json /data/todos.json
 fi
 
-# server.js resolves its data directory relative to the application root.
-rm -rf /app/data
-ln -s /data /app/data
+cp /app/server.js /app/package.json /data/app/
+rm -rf /data/app/scripts /data/app/public
+cp -R /app/scripts /data/app/scripts
+cp -R /app/public /data/app/public
+rm -rf /data/app/node_modules
+ln -s /app/node_modules /data/app/node_modules
 
-cd /app
+# server.js resolves its data directory relative to the application root.
+rm -rf /data/app/data
+ln -s /data /data/app/data
+
+cd /data/app
 exec node server.js
